@@ -1,155 +1,211 @@
-MetaPassthrough-VR-System
+# MetaPassthrough-VR-System
 
-This project implements a Meta Passthrough VR System in Unity (OpenXR + XR Interaction Toolkit).
-It extends Meta’s Passthrough Camera API samples by integrating object detection, marker-based interaction, and dynamic passthrough windows, enabling users to naturally interact with both virtual content and real-world objects.
+A Unity-based VR/MR prototype that integrates **Meta Passthrough Camera API**, **OpenXR**, and **XR Interaction Toolkit**.  
+It adds **multi-object detection**, **marker-based interaction**, and **dynamic passthrough windows** so users can reveal and manipulate real-world objects inside a VR scene—ideal for **VR teaching**, **remote experiments**, and **collaborative learning**.
 
-📖 Table of Contents
+---
 
-Project Overview
+## Table of Contents
+1. [Overview](#overview)  
+2. [Features](#features)  
+3. [Tech Stack](#tech-stack)  
+4. [Requirements](#requirements)  
+5. [Project Structure](#project-structure)  
+6. [Setup & Installation](#setup--installation)  
+7. [Build & Run (Quest)](#build--run-quest)  
+8. [How to Use](#how-to-use)  
+9. [Demo](#demo)  
+10. [Known Limitations](#known-limitations)  
+11. [Roadmap](#roadmap)  
+12. [Acknowledgements](#acknowledgements)  
+13. [License](#license)
 
-Key Features
+---
 
-Requirements
+## Overview
 
-Installation & Setup
+This project extends Meta’s Passthrough Camera API samples by enabling an **interactive passthrough workflow**:
+- The system **detects real-world objects** (e.g., laptop, tools) and shows **labeled bounding boxes** with **markers** in VR.
+- Clicking a marker **creates a Passthrough window** (a quad using Meta passthrough) sized and oriented to the object so the **real object appears clearly** in VR.
+- Each window **faces the user** initially for better visibility and can be **grabbed/rotated/scaled**.  
+- Users can **pause detection**, **clear markers**, **delete one/all windows**, and **hover a marker** to preview its passthrough window before opening.
 
-How to Use
+Use cases include: **classroom demonstrations**, **lab collaborations**, **remote guidance**, and **mixed-reality prototyping**.
 
-Demo
+---
 
-Limitations & Future Work
+## Features
 
-License
+- **Automatic Object Recognition**  
+  On-device ML recognizes common objects and attaches 2D boxes + VR markers.
 
-🚀 Project Overview
+- **Marker → Passthrough Window**  
+  Click a marker to spawn a **custom-sized Passthrough window** aligned to the object’s real-world extents and orientation.
 
-This system leverages the Meta Passthrough Camera API to build a hybrid VR/AR prototype for teaching, remote collaboration, and lab scenarios.
-It enables users to:
+- **Natural Manipulation**  
+  Grab, rotate, and scale windows via **hands** or **controllers** (XR Interaction Toolkit).
 
-Recognize real-world objects via on-device ML (Unity Sentis).
+- **Flexible Controls**  
+  Pause/resume recognition, hover-to-preview, clear markers/boxes, delete one/all windows.
 
-Dynamically create passthrough windows aligned with detected objects.
+- **Designed for VR Learning & Remote Experimentation**  
+  See and operate real tools while discussing in VR.
 
-Interact with passthrough windows (move, rotate, scale, preview, delete).
+---
 
-Seamlessly blend the VR world with real-world objects for immersive learning and collaboration.
+## Tech Stack
 
-✨ Key Features
+- **Unity**: 2022.3 LTS or Unity 6 (6000.x)  
+- **XR**: OpenXR + XR Interaction Toolkit  
+- **Meta**: Passthrough Camera API, MR Utility Kit (MRUK)  
+- **On-device ML (optional)**: Unity Sentis (e.g., YOLO-based object detection)
 
-Automatic Object Detection: Recognizes common objects (laptops, tools, etc.) and attaches bounding boxes + markers in VR.
+---
 
-Marker-based Interaction: Users can click markers to open passthrough windows.
+## Requirements
 
-Dynamic Passthrough Windows:
+### Software
+- **Unity**: 2022.3 LTS or Unity 6 (e.g., 6000.0.38f1)  
+- **Packages**:  
+  - OpenXR Plugin  
+  - XR Interaction Toolkit  
+  - Meta OpenXR Feature Group(s) enabled (Passthrough)  
+  - Meta MR Utility Kit (MRUK) v74+  
+  - Unity Sentis v2.1.1+ (if using the detection sample)
 
-Custom-sized and oriented to match the real object.
+### Hardware
+- **Meta Quest 3 / Quest 3S**  
+- **Horizon OS v74+**
 
-Always face the user initially.
+### Permissions
+- `android.permission.CAMERA`  
+- `horizonos.permission.HEADSET_CAMERA` (Meta passthrough permission)
 
-Can be grabbed, rotated, scaled, and repositioned.
+> **Note (Unity 6)**: If you upgrade to Unity 6, ensure your **Android Manifest** uses `GameActivity` and that passthrough-related permissions/themes are present. Meta > Tools includes helpers to update the manifest.
 
-Flexible Controls:
+---
 
-Pause/resume recognition.
+## Project Structure
 
-Delete single or all windows.
+```
+MetaPassthrough-VR-System/
+├─ Assets/
+│  ├─ Scripts/                    # Core logic (detection, markers, passthrough windows)
+│  ├─ Prefabs/                    # MarkerPrefab, PassthroughWindowPrefab, etc.
+│  ├─ Scenes/                     # e.g., MultiObjectDetection, VirtualRoom
+│  └─ Materials/                  # Materials for passthrough quads & UI
+├─ Media/                         # Place your GIFs, MP4s, thumbnails here
+├─ ProjectSettings/
+├─ Packages/
+├─ README.md
+└─ .gitignore
+```
 
-Hover preview before opening windows.
+> Use a Unity `.gitignore` to exclude `Library/`, `Temp/`, `Logs/`, `Build/`, and large binaries (e.g., `*.apk`).
 
-Use Cases: VR teaching, collaborative lab experiments, remote assistance.
+---
 
-⚙️ Requirements
-Software
+## Setup & Installation
 
-Unity 2022.3 LTS or Unity 6 (6000.x)
+1. **Clone**
+   ```bash
+   git clone https://github.com/15611257356/MetaPassthrough-VR-System.git
+   cd MetaPassthrough-VR-System
+   ```
 
-Meta OpenXR Plugin (2.1.0 or newer)
+2. **Open in Unity** (2022.3 LTS or Unity 6).
 
-Meta MR Utility Kit (MRUK) v74.0.0+
+3. **Meta Project Setup Tool**  
+   In Unity: **Meta > Tools > Project Setup Tool** → Fix/Apply all recommended settings.
 
-Unity Sentis v2.1.1+
+4. **OpenXR Settings**
+   - Project Settings → XR Plug-in Management → **OpenXR** as active for Android.
+   - Enable Meta feature groups as needed (e.g., **Passthrough**).
 
-Hardware
+5. **Packages**
+   - Ensure **XR Interaction Toolkit**, **Meta MRUK**, and **Unity Sentis** (if needed) are installed.
 
-Meta Quest 3 / Quest 3S
+6. **Android Build Support**  
+   Install via Unity Hub if not present.
 
-Horizon OS v74+
+---
 
-Permissions
+## Build & Run (Quest)
 
-android.permission.CAMERA
+1. **Switch Platform**: File → Build Settings → Platform: **Android** → *Switch Platform*  
+2. **Scenes**: Add your main scene(s) to *Scenes In Build*.  
+3. **Player Settings** (Android):  
+   - Identification → Package Name (e.g., `com.example.metapassthrough`)  
+   - Minimum API: follow Meta recommendations for your Unity/SDK version  
+4. **Build & Run** to a connected Quest device (USB or over Wi‑Fi).
 
-horizonos.permission.HEADSET_CAMERA
+> If Unity 6: verify manifest updates (GameActivity, theme) and passthrough permissions. Use **Meta > Tools** helpers if needed.
 
-🛠 Installation & Setup
+---
 
-Clone this repository:
+## How to Use
 
-git clone https://github.com/15611257356/MetaPassthrough-VR-System.git
+- Start the app in the headset.  
+- The system detects objects and shows **markers** and **2D boxes**.  
+- **Click a marker** → creates a **Passthrough window** aligned to the object.  
+- **Manipulation**: grab/rotate/scale windows with hands or controllers.  
+- **Controls (example mapping)**:  
+  - **A**: Confirm/Create window from highlighted marker  
+  - **B**: Pause/Resume recognition  
+  - **Y**: Delete all windows (hold to confirm)  
+  - **Hover marker**: preview a small passthrough window (no creation)  
+- **Utilities**: clear markers/boxes, delete single window via its close button.
 
+> Control bindings are configurable via XR Interaction Toolkit—adjust to your project’s input actions if they differ.
 
-Open the project in Unity 2022.3 LTS.
+---
 
-Go to Meta > Tools > Project Setup Tool and apply recommended settings.
+## Demo
 
-Ensure Android Build Support is enabled.
+Place your media files in the `Media/` folder and update the links below.
 
-Connect your Meta Quest 3 headset and build to device.
+### Object Detection → Marker Placement
+![Object Detection](./Media/object_detection.gif)  
+*(Replace with your actual GIF)*
 
-🎮 How to Use
-
-Run the application inside Quest 3.
-
-Look around your environment — detected objects will show bounding boxes and markers.
-
-Click on a marker to open a passthrough window of the object.
-
-Use controllers to:
-
-Grab & Move the window.
-
-Rotate & Scale the window.
-
-Hover on marker to preview before creating a window.
-
-Pause recognition or clear markers/windows via menu controls.
-
-📹 Demo
-
-You can showcase your results with short demo clips.
-👉 Just upload your demo videos (.mp4, .gif) to a Media/ folder in your repo, then reference them here:
-
-Example (replace with your files):
-
-### Object Detection & Marker Placement
-![Object Detection](./Media/object_detection.gif)
-
-### Dynamic Passthrough Window
-![Passthrough Window Demo](./Media/passthrough_window.gif)
+### Marker Click → Passthrough Window
+![Passthrough Window](./Media/passthrough_window.gif)  
+*(Replace with your actual GIF)*
 
 ### Full Demo Video
-[![Watch the video](./Media/demo_thumbnail.png)](https://user-images.githubusercontent.com/your-demo-link.mp4)
+[![Watch the video](./Media/demo_thumbnail.png)](https://example.com/your-demo-video.mp4)  
+*(Use YouTube/Bilibili/GitHub Releases or other hosting for files >100MB)*
 
+---
 
-⚠️ 注意：GitHub 不支持直接存储超过 100MB 的视频。如果视频较大，建议上传到 GitHub Releases / Google Drive / YouTube / Bilibili，然后把链接贴在这里。
+## Known Limitations
 
-⚠️ Limitations & Future Work
+- **Unity WebCamTexture constraints** (in Meta samples): rectangular capture region, limited resolution, timing offsets.  
+- **Single-camera access** at a time in certain flows.  
+- **On-device ML performance**: Sentis inference can impact frame time; consider async/layered updates.  
+- **Detection accuracy**: may misclassify similar objects; trained on ~80 classes.  
+- **Environment Depth + OpenXR**: depth features require Unity 6 with proper OpenXR setup.
 
-Performance: Running ML (Sentis YOLO) on-device may affect frame rate.
+---
 
-Detection Accuracy: Misclassification may happen (e.g., phone → remote).
+## Roadmap
 
-Unity 6 Compatibility: Requires updating Android Manifest manually.
+- Optimize window interaction & smoothing for hand tracking.  
+- Improve object alignment between 2D boxes and 3D anchors.  
+- Multi-user collaboration / networking.  
+- Editor tooling for faster parameter tuning (window size/orientation presets).
 
-Future Improvements:
+---
 
-Support multiple concurrent windows with shared interaction logic.
+## Acknowledgements
 
-Optimize Sentis inference for lower latency.
+- Built on top of concepts from **Meta’s Unity Passthrough Camera API Samples**.  
+- Thanks to the Unity and Meta XR communities for guidance and tools.
 
-Enable remote collaboration features.
+---
 
-📜 License
+## License
 
-This project builds upon Meta’s Unity Passthrough Camera API Samples and follows their license terms.
-Custom code for passthrough window interaction is released under the MIT License.
+- **Custom code in this repository**: MIT (unless otherwise noted).  
+- **Upstream/third-party samples or assets**: retain their original licenses.  
+See the `LICENSE` file(s) for details.
