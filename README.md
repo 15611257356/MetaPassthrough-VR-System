@@ -162,19 +162,8 @@ MetaPassthrough-VR-System/
 
 ## Demo
 
-Place your media files in the `Media/` folder and update the links below.
-
-### Object Detection → Marker Placement
-![Object Detection](./Media/object_detection.gif)  
-*(Replace with your actual GIF)*
-
-### Marker Click → Passthrough Window
-![Passthrough Window](./Media/passthrough_window.gif)  
-*(Replace with your actual GIF)*
-
 ### Full Demo Video
-[![Watch the video](./Media/demo_thumbnail.png)](https://example.com/your-demo-video.mp4)  
-*(Use YouTube/Bilibili/GitHub Releases or other hosting for files >100MB)*
+[![Watch the video]](https://example.com/your-demo-video.mp4)  
 
 ---
 
