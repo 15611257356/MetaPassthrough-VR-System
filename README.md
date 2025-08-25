@@ -89,16 +89,36 @@ Use cases include: **classroom demonstrations**, **lab collaborations**, **remot
 
 ```
 MetaPassthrough-VR-System/
-├─ Assets/
-│  ├─ Scripts/                    # Core logic (detection, markers, passthrough windows)
-│  ├─ Prefabs/                    # MarkerPrefab, PassthroughWindowPrefab, etc.
-│  ├─ Scenes/                     # e.g., MultiObjectDetection, VirtualRoom
-│  └─ Materials/                  # Materials for passthrough quads & UI
-├─ Media/                         # Place your GIFs, MP4s, thumbnails here
-├─ ProjectSettings/
-├─ Packages/
-├─ README.md
-└─ .gitignore
+├── Assets/
+│   ├── Brick Project Studio/
+│   ├── CompositionLayers/
+│   ├── MetaXR/
+│   ├── Oculus/
+│   ├── PassthroughCameraApiSamples/
+│   │   ├── DeleteButton.cs
+│   │   ├── MarkerClickToPassthrough.cs
+│   │   ├── PassthroughProjectionSurface.cs
+│   │   └── ...
+│   ├── Plugins/
+│   ├── Resources/
+│   ├── Settings/
+│   ├── XR/
+│   ├── XRI/
+│   └── ...
+│
+├── Media/
+│   └── demo.gif
+│
+├── Packages/
+├── ProjectSettings/
+│
+├── .gitignore
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── README.md
+└── TempAssembly.dll
+
 ```
 
 > Use a Unity `.gitignore` to exclude `Library/`, `Temp/`, `Logs/`, `Build/`, and large binaries (e.g., `*.apk`).
