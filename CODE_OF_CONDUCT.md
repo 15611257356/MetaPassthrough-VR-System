@@ -38,7 +38,7 @@ It also applies outside the project spaces if an individual's behavior negativel
 
 ## Enforcement
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project maintainer at **[your_email@example.com]**.  
+Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by contacting the project maintainer at **whr15611257356@163.com**.  
 
 All complaints will be reviewed and investigated, resulting in a response deemed appropriate to the circumstances. The project team is obligated to maintain confidentiality with regard to the reporter of an incident.
 
