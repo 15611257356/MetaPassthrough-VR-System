@@ -183,7 +183,8 @@ MetaPassthrough-VR-System/
 ## Demo
 
 ### Full Demo Video
-[![Watch the video]](https://example.com/your-demo-video.mp4)  
+[video1.mp4](./Demo/Video demo1.mp4)
+[video2.mp4](./Demo/Video demo2.mp4)
 
 ---
 
